@@ -21,7 +21,7 @@ public class ToDoController {
     this.todoService = todoService;
   }
 
-  @GetMapping("/")
+  @GetMapping("/todo")
   public String todo(Model model){
     List<ToDo> todos = todoService.getAlltodos();
     model.addAttribute("todos", todos);
@@ -41,7 +41,7 @@ public class ToDoController {
       redirectAttributes.addFlashAttribute("todoPriority", todoPriority);
       redirectAttributes.addFlashAttribute("todoStatus", todoStatus);
     }
-    return "redirect:/";
+    return "redirect:/todo";
   }
   
 }
