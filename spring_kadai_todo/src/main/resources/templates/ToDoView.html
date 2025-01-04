@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>todo</title>
+</head>
+<body>
+  <h2>ToDoリスト</h2>
+  <form th:action="@{/register}" method="post">
+    <label for="todo_title">todoタイトル</label>
+    <input type="text" id="todo_title" name="todo_title" th:value="${todotitle}">
+
+    <label for="todo_priority">優先度</label>
+    <select name="todo_priority" id="todo_priority">
+      <option value="高" th:selected="${todoPriority == '高'}">高</option>
+      <option value="中" th:selected="${todoPriority == '中'}">中</option>
+      <option value="低" th:selected="${todoPriority == '低'}">低</option>
+    </select>
+
+    <label for="todo_status">ステータス</label>
+    <select name="todo_status" id="todo_status">
+      <option value="未着手" th:selected="${todoStatus == '未着手'}">未着手</option>
+      <option value="着手中" th:selected="${todoStatus == '着手中'}">着手中</option>
+      <option value="完了" th:selected="${todoStatus == '完了'}">完了</option>
+    </select>
+
+    <button type="submit">登録</button>
+  </form>
+
+  <p th:if="${successMessage}" th:text="${successMessage}" style="color: green;"></p>
+  <p th:if="${failureMessage}" th:text="${failureMessage}" style="color: red;"></p>
+
+  <h2>todo一覧</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>タイトル</th>
+        <th>優先度</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr th:each="todo : ${todos}">
+        <td th:text="${todo.todoId}"></td>
+        <td th:text="${todo.todoTitle}"></td>
+        <td th:text="${todo.todoPriority}"></td>
+        <td th:text="${todo.todoStatus}"></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
